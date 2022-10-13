@@ -3,14 +3,39 @@ import configparser
 import urllib.request
 import PySimpleGUI as sg
 import os
+import getpass
+import sys
 
-url='https://github.com/TI0360/1.7sound-definition/releases/latest/download/config.ini'
-save_name='config.ini'
-urllib.request.urlretrieve(url, save_name)
+file_version = "2"
 
+user = getpass.getuser()
+
+args = sys.argv
+
+def write_version():
+    with open(f"C:\\Users\\{user}\\17-py-ti\\version.txt", mode = "w") as f:
+        f.write(file_version)
+
+if args[1] == "version":
+    write_version()
+    sys.exit()
+if args[1] == "go":
+    pass
+else:
+    pass
+
+os.makedirs(f"C:\\Users\\{user}\\17-py-ti\\", exist_ok=True)
+with open(f"C:\\Users\\{user}\\17-py-ti\\version.txt", mode = "w") as f:
+    f.write(file_version)
+
+confurl='https://github.com/TI0360/1.7sound-definition/releases/latest/download/config.ini'
+confsave_name='config.ini'
+data = urllib.request.urlopen(confurl).read()
+with open(f"C:\\Users\\{user}\\17-py-ti\\{confsave_name}", mode="wb") as f:
+    f.write(data)
 
 config = configparser.ConfigParser()
-config.read('config.ini', encoding='utf-8')
+config.read(f'C:\\Users\\{user}\\17-py-ti\\config.ini', encoding='utf-8')
 
 sg.theme('BlueMono')
 
@@ -34,11 +59,11 @@ while True:
     event, values = window.read()
 
     if event == sg.WIN_CLOSED:
-        os.remove('config.ini')
+        os.remove(f'C:\\Users\\{user}\\17-py-ti\\config.ini')
         break
 
     if event == 'exit':
-        os.remove('config.ini')
+        os.remove(f'C:\\Users\\{user}\\17-py-ti\\config.ini')
         break
 
     if event == 'enter':
@@ -46,21 +71,29 @@ while True:
             url = f"https://github.com/TI0360/1.7sound-pack/releases/latest/download/{fn1}"
             if values['name'] in "":
                 save_name = fn1
-                urllib.request.urlretrieve(url, save_name)
-                sg.popup("ダウンロードが終了しました。")
+                data = urllib.request.urlopen(url).read()
+                with open(f"C:\\Users\\{user}\\Desktop\\{save_name}", mode="wb") as f:
+                    f.write(data)
+                sg.popup("デスクトップへのダウンロードが完了しました。")
             else:
-                urllib.request.urlretrieve(url, values['name'] + ".zip")
-                sg.popup("ダウンロードが終了しました。")
+                data = urllib.request.urlopen(url).read()
+                with open(f"C:\\Users\\{user}\\Desktop\\{values['name']}.zip", mode="wb") as f:
+                    f.write(data)
+                sg.popup("デスクトップへのダウンロードが完了しました。")
 
         if values['select'] == f'{mv2}':
             url = f"https://github.com/TI0360/1.7sound-pack/releases/latest/download/{fn2}"
             if values['name'] in "":
                 save_name = fn2
-                urllib.request.urlretrieve(url, save_name)
-                sg.popup("ダウンロードが終了しました。")
+                data = urllib.request.urlopen(url).read()
+                with open(f"C:\\Users\\{user}\\Desktop\\{save_name}", mode="wb") as f:
+                    f.write(data)
+                sg.popup("デスクトップへのダウンロードが完了しました。")
             else:
-                urllib.request.urlretrieve(url, values['name'] + ".zip")
-                sg.popup("ダウンロードが終了しました。")
+                data = urllib.request.urlopen(url).read()
+                with open(f"C:\\Users\\{user}\\Desktop\\{values['name']}.zip", mode="wb") as f:
+                    f.write(data)
+                sg.popup("デスクトップへのダウンロードが完了しました。")
 
 window.close()
 
@@ -74,5 +107,8 @@ https://github.com/TI0360/re-1.7sound-downloader
 
 [LGPL3]
 https://github.com/TI0360/re-1.7sound-downloader/blob/main/LICENCE
+
+Discord
+Minakami#9858
 
 '''
