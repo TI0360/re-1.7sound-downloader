@@ -46,15 +46,21 @@ req.close()
 res = json.loads(req.text)
 never = res[0]["tag_name"]
 ver = never.split('-')[1]
-if int(ver) > nover:
-    url='https://github.com/TI0360/re-1.7sound-downloader/releases/latest/download/1.7sound-pack-downloader.exe'
-    save_name='1.7sound-pack-downloader.exe'
-    data = urllib.request.urlopen(url).read()
-    with open(f"C:\\Users\\{user}\\17-py-ti\\{save_name}", mode="wb") as f:
-        f.write(data)
-else:
-    subprocess.run(f"C:\\Users\\{user}\\17-py-ti\\1.7sound-pack-downloader.exe go")
+
+try:
+    if int(ver) > nover:
+        url='https://github.com/TI0360/re-1.7sound-downloader/releases/latest/download/1.7sound-pack-downloader.exe'
+        save_name='1.7sound-pack-downloader.exe'
+        data = urllib.request.urlopen(url).read()
+        with open(f"C:\\Users\\{user}\\17-py-ti\\{save_name}", mode="wb") as f:
+            f.write(data)
+    else:
+        subprocess.run(f"C:\\Users\\{user}\\17-py-ti\\1.7sound-pack-downloader.exe go")
+        sys.exit()
+
+except:
     sys.exit()
+
 
 layout = [ [sg.Text("アプリのアップデートが完了しました。再度起動しなおしてください。")],
         [sg.Button('OK', key='enter')]  ]

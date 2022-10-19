@@ -6,7 +6,7 @@ import os
 import getpass
 import sys
 
-file_version = "2"
+file_version = "3"
 
 user = getpass.getuser()
 
@@ -43,13 +43,15 @@ sg.theme('BlueMono')
 fv = config.get('main', 'FILE')
 mv1 = config.get('main', 'VERSION1')
 mv2 = config.get('main', 'VERSION2')
+mv3 = config.get('main', 'VERSION3')
 fn1 = config.get('download', 'FN1')
 fn2 = config.get('download', 'FN2')
+fn3 = config.get('download', 'FN3')
 
 
 layout = [ [sg.Text("1.7sound-packダウンローダーへようこそ。安定最新版のファイルをダウンロードすることができます。")],
         [sg.Text(f"最新バージョン：   [{fv}]")],
-        [sg.Text("バージョン選択："), sg.Combo((f'{mv1}', f'{mv2}'), default_value="選択してください...",size=(18, 1), key='select')],
+        [sg.Text("バージョン選択："), sg.Combo((f'{mv1}', f'{mv2}', f'{mv3}'), default_value="選択してください...",size=(18, 1), key='select')],
         [sg.Text("ファイル名："), sg.InputText('', key='name'), sg.Text("[拡張子は含めないでください]")],
         [sg.Button('OK', key='enter'), sg.Button('終了', key='exit')]  ]
 
@@ -85,6 +87,20 @@ while True:
             url = f"https://github.com/TI0360/1.7sound-pack/releases/latest/download/{fn2}"
             if values['name'] in "":
                 save_name = fn2
+                data = urllib.request.urlopen(url).read()
+                with open(f"C:\\Users\\{user}\\Desktop\\{save_name}", mode="wb") as f:
+                    f.write(data)
+                sg.popup("デスクトップへのダウンロードが完了しました。")
+            else:
+                data = urllib.request.urlopen(url).read()
+                with open(f"C:\\Users\\{user}\\Desktop\\{values['name']}.zip", mode="wb") as f:
+                    f.write(data)
+                sg.popup("デスクトップへのダウンロードが完了しました。")
+
+        if values['select'] == f'{mv3}':
+            url = f"https://github.com/TI0360/1.7sound-pack/releases/download/1.9.2-1.20ready/{fn3}"
+            if values['name'] in "":
+                save_name = fn3
                 data = urllib.request.urlopen(url).read()
                 with open(f"C:\\Users\\{user}\\Desktop\\{save_name}", mode="wb") as f:
                     f.write(data)
