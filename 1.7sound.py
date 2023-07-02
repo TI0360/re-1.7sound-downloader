@@ -7,7 +7,7 @@ import getpass
 import sys
 import PySimpleGUI as sg
 
-file_version = "4"
+file_version = "5"
 
 user = getpass.getuser()
 
@@ -81,7 +81,7 @@ def enter_f():
         label = customtkinter.CTkLabel(window, text="ファイルのダウンロードが完了しました。")
         label.pack(side="top", fill="both", expand=True, padx=40, pady=40)
 
-    if dversion == f'{mv2}':
+    elif dversion == f'{mv2}':
         url = f"https://github.com/TI0360/1.7sound-pack/releases/latest/download/{fn2}"
         save_name = fn2
         data = urllib.request.urlopen(url).read()
@@ -93,7 +93,7 @@ def enter_f():
         label = customtkinter.CTkLabel(window, text="ファイルのダウンロードが完了しました。")
         label.pack(side="top", fill="both", expand=True, padx=40, pady=40)
 
-    if dversion == f'{mv3}':
+    elif dversion == f'{mv3}':
         url = f"https://github.com/TI0360/1.7sound-pack/releases/download/1.9.2-1.20ready/{fn3}"
         save_name = fn3
         data = urllib.request.urlopen(url).read()
@@ -139,7 +139,7 @@ button2.pack(side=customtkinter.RIGHT, expand=True)
 app.mainloop()
 
 '''
-Copyright © 2001-2021 Python Software Foundation; All Rights Reserved
+Copyright © 2001-2023 Python Software Foundation; All Rights Reserved
 
 © Copyright 2021 PySimpleGUI
 
@@ -149,6 +149,7 @@ https://github.com/TI0360/re-1.7sound-downloader
 https://github.com/TI0360/re-1.7sound-downloader/blob/main/LICENCE
 
 Discord
-Minakami#9858
+old: Minakami#9858
+new: ti0360
 
 '''
